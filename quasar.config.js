@@ -71,6 +71,15 @@ module.exports = configure(function (ctx) {
         chain
           .plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
+      },
+      extendWebpack(cfg, { isServer, isClient }) {
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
+
+          // Add your own alias like this
+          db: path.resolve(__dirname, './src-electron/db'),
+          web: path.resolve(__dirname, './src-electron/web')
+        }
       }
     },
 
@@ -98,7 +107,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ['Dialog', 'Notify', 'Loading']
     },
 
     // animations: 'all', // --- includes all animations

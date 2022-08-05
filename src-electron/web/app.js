@@ -22,9 +22,13 @@ app.get('/', (req, res) => {
 })
 
 // Create an HTTP server.
-http.createServer(app).listen(HTTP_PORT)
+http.createServer(app).listen(HTTP_PORT, () => {
+  console.log(`HTTP Server start on port ${HTTP_PORT}`)
+})
 
 // Create an HTTPS server.
-https.createServer(options, app).listen(HTTPS_PORT)
+https.createServer(options, app).listen(HTTPS_PORT, () => {
+  console.log(`HTTPS Server start on port ${HTTPS_PORT}`)
+})
 
 export default app

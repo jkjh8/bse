@@ -5,7 +5,9 @@ import os from 'os'
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
 
-import '../web/app'
+import './web/app'
+import './db'
+import './ipc'
 
 try {
   if (platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
