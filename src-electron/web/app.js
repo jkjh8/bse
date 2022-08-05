@@ -1,3 +1,4 @@
+import { process } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import { loggerArr as log } from '../logger'
@@ -20,10 +21,15 @@ const HTTPS_PORT = 3443
 
 // 인증서
 const options = {
-  key: fs.readFileSync('ssl/minica-key.pem'),
-  cert: fs.readFileSync('ssl/minica.pem')
+  key: process.env.DEV
+    ? fs.readFileSync(path.join('ssl', 'minica-key.pem'))
+    : fs.readFileSync(
+        path.join(path.dirname(__dirname), 'ssl', 'minica-key.pem')
+      ),
+  cert: process.env.DEV
+    ? fs.readFileSync(path.join('ssl', 'minica.pem'))
+    : fs.readFileSync(path.join(path.dirname(__dirname), 'ssl', 'minica.pem'))
 }
-
 const app = express()
 
 // middleware
