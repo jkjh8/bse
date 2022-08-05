@@ -45,6 +45,7 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
+      env: require('dotenv').config().parsed,
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // transpile: false,
@@ -71,15 +72,6 @@ module.exports = configure(function (ctx) {
         chain
           .plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
-      },
-      extendWebpack(cfg, { isServer, isClient }) {
-        cfg.resolve.alias = {
-          ...cfg.resolve.alias, // This adds the existing alias
-
-          // Add your own alias like this
-          db: path.resolve(__dirname, './src-electron/db'),
-          web: path.resolve(__dirname, './src-electron/web')
-        }
       }
     },
 

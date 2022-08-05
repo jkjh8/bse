@@ -5,9 +5,16 @@ import os from 'os'
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
 
-import './web/app'
+// 중복실행금지
+app.requestSingleInstanceLock({ key: 'qsyscontrolforbs' })
+app.on('second-instance', (e, argv, cwd) => {
+  console.log(e, argv, cwd)
+  app.exit(0)
+})
+
 import './db'
 import './ipc'
+import './web/app'
 
 try {
   if (platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -30,6 +37,7 @@ function createWindow() {
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
+      nodeIntegrationInWorker: true,
       // More info: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/electron-preload-script
       preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD)
     }

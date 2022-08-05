@@ -1,12 +1,23 @@
+import path from 'path'
+import fs from 'fs'
+import { loggerArr as log } from '../api/logger'
+
 import express from 'express'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import http from 'http'
 import https from 'https'
+import httpLogger from 'morgan'
+import MongoStore from 'connect-mongo'
+import passport from 'passport'
+import session from 'express-session'
+import routes from './routes'
 
-import fs from 'fs'
-
+// ports
 const HTTP_PORT = 3000
 const HTTPS_PORT = 3443
 
+// 인증서
 const options = {
   key: fs.readFileSync('ssl/minica-key.pem'),
   cert: fs.readFileSync('ssl/minica.pem')
@@ -14,21 +25,44 @@ const options = {
 
 const app = express()
 
-// Default route for server status
-app.get('/', (req, res) => {
-  res.json({
-    message: `Server is running on port ${req.secure ? HTTPS_PORT : HTTP_PORT}`
+// middleware
+app.use(cors())
+app.use(httpLogger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+
+// session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true
+    },
+    store: MongoStore.create({
+      mongoUrl: `mongodb://127.0.0.1:27017/bs`
+    })
   })
+)
+
+// router
+const pf = path.resolve(__dirname, process.env.QUASAR_PUBLIC_FOLDER, 'spa')
+app.use(express.static(pf))
+app.get('/', function (req, res, next) {
+  res.sendfile(path.join(pf, 'index.html'))
 })
+
+// router
+app.use('/api', routes)
 
 // Create an HTTP server.
 http.createServer(app).listen(HTTP_PORT, () => {
-  console.log(`HTTP Server start on port ${HTTP_PORT}`)
+  log(3, 'server', `HTTP Server start on port ${HTTP_PORT}`)
 })
 
 // Create an HTTPS server.
 https.createServer(options, app).listen(HTTPS_PORT, () => {
-  console.log(`HTTPS Server start on port ${HTTPS_PORT}`)
+  log(3, 'server', `HTTPS Server start on port ${HTTPS_PORT}`)
 })
-
-export default app
