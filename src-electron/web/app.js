@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import { loggerArr as log } from '../api/logger'
+import { loggerArr as log } from '../logger'
 
 import express from 'express'
 import cors from 'cors'
@@ -10,6 +10,7 @@ import https from 'https'
 import httpLogger from 'morgan'
 import MongoStore from 'connect-mongo'
 import passport from 'passport'
+import initPass from './api/users/passport'
 import session from 'express-session'
 import routes from './routes'
 
@@ -26,7 +27,14 @@ const options = {
 const app = express()
 
 // middleware
-app.use(cors())
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      callback(null, origin)
+    },
+    credentials: true
+  })
+)
 app.use(httpLogger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -46,6 +54,11 @@ app.use(
     })
   })
 )
+
+// passport
+initPass()
+app.use(passport.initialize())
+app.use(passport.session())
 
 // router
 const pf = path.resolve(__dirname, process.env.QUASAR_PUBLIC_FOLDER, 'spa')

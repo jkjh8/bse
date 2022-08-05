@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { loggerArr as log } from '../api/logger'
+import { loggerArr as log } from '../logger'
 
 mongoose
   .connect('mongodb://localhost:27017/bs')

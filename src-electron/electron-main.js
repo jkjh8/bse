@@ -6,15 +6,11 @@ import os from 'os'
 const platform = process.platform || os.platform()
 
 // 중복실행금지
-app.requestSingleInstanceLock({ key: 'qsyscontrolforbs' })
-app.on('second-instance', (e, argv, cwd) => {
-  console.log(e, argv, cwd)
-  app.exit(0)
-})
-
-import './db'
-import './ipc'
-import './web/app'
+// app.requestSingleInstanceLock({ key: 'qsyscontrolforbs' })
+// app.on('second-instance', (e, argv, cwd) => {
+//   console.log(e, argv, cwd)
+//   app.exit(0)
+// })
 
 try {
   if (platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -25,6 +21,9 @@ try {
 } catch (_) {}
 
 let mainWindow
+import './ipc'
+import './db'
+import './web/app'
 
 function createWindow() {
   /**
@@ -47,7 +46,7 @@ function createWindow() {
 
   if (process.env.DEBUGGING) {
     // if on DEV or Production with debug enabled
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   } else {
     // we're on production; no access to devtools pls
     mainWindow.webContents.on('devtools-opened', () => {

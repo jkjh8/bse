@@ -1,8 +1,8 @@
 {
-  "name": "bse",
+  "name": "bs",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "bse",
+  "description": "brocast server",
+  "productName": "BS",
   "author": "jkjh8 <jkjh82@naver.com>",
   "private": true,
   "scripts": {
@@ -40,6 +40,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app-webpack": "^3.0.0",
+    "@vue/devtools": "^6.2.1",
     "electron": "^19.0.4",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",

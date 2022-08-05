@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { searchArrToStr, makeSearchField } from '../../api/logger/search'
+import { searchArrToStr, makeSearchField } from '../../logger/search'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
 const eventlogSchema = new mongoose.Schema(

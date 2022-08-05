@@ -1,16 +1,19 @@
-import path from 'path'
 import express from 'express'
-import api from './api'
-
 const router = express.Router()
 
-// const publicFolder = path.resolve(__dirname, process.env.QUASAR_PUBLIC_FOLDER)
+import auth from './auth'
+// import eventlog from './eventlog'
+// import devices from './device'
+// import zones from './zones'
 
-// /* GET home page. */
-// router.get('/', function (req, res, next) {
-//   res.render(path.join(publicFolder, 'spa', 'index.js'))
-// })
+router.get('/', (req, res, next) => {
+  res.send('<h2>API First Page</h2>')
+})
 
-router.use('/api', api)
+// router.use('/admin', import'./admin'))
+router.use('/auth', auth)
+// router.use('/eventlog', eventlog)
+// router.use('/device', devices)
+// router.use('/zones', zones)
 
 export default router

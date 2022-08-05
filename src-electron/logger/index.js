@@ -1,4 +1,4 @@
-import Log from '../../db/models/eventlog'
+import Log from '../db/models/eventlog'
 import clc from 'cli-color'
 import moment from 'moment'
 

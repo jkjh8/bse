@@ -8,13 +8,12 @@ const router = useRouter()
     <q-header class="header row justify-between items-center">
       <q-toolbar class="q-gutter-x-md">
         <!-- <q-btn flat round icon="menu" size="md" /> -->
-        <div class="row pointer" @click="router.push('/')">
-          <q-icon
-            style="margin-top: 3px"
-            name="svguse:icons.svg#logo"
-            size="1.8rem"
-          />
-          <div class="header-font">Media Server</div>
+        <div
+          class="logo row no-wrap items-center q-gutter-x-sm pointer"
+          @click="router.push('/')"
+        >
+          <q-img src="logo.png" style="width: 1.5rem; height: 1.5rem" />
+          <div class="header-font q-mt-xs">Media Server</div>
         </div>
       </q-toolbar>
       <!-- <Menu /> -->
@@ -34,8 +33,13 @@ const router = useRouter()
   /* padding: 0 5% 0 5%; */
 }
 .header-font {
-  font-family: NanumSquare;
+  font-family: 다음체;
   font-weight: 800;
   font-size: 1.5rem;
+}
+.logo {
+  position: absolute;
+  left: 2rem;
+  height: 3rem;
 }
 </style>
