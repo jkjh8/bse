@@ -1,0 +1,22 @@
+// app global css in SCSS form
+.pointer {
+  cursor: pointer;
+}
+
+.bg-tooltip {
+  background: rgba(1, 1, 1, 0.5);
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: NanumSquare;
+}
+
+.router-view {
+  border-top: 1px solid #efefef;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  padding: 5% 5% 0 5%;
+}
