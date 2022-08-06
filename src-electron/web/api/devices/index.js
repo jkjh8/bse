@@ -1,4 +1,4 @@
-import Devices from '../../../db/models/devices'
+import Devices from 'db/models/devices'
 import { loggerArr as log } from '../../../logger'
 import { objTokv } from '../functions'
 

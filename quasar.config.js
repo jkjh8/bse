@@ -72,14 +72,6 @@ module.exports = configure(function (ctx) {
         chain
           .plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
-      },
-      extendWebpack(cfg, { isServer, isClient }) {
-        cfg.resolve.alias = {
-          ...cfg.resolve.alias, // This adds the existing alias
-
-          // Add your own alias like this
-          '@electron': path.resolve(__dirname, './src-electron')
-        }
       }
     },
 
@@ -236,6 +228,10 @@ module.exports = configure(function (ctx) {
         chain
           .plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: ['js'] }])
+        chain.resolve.alias.set(
+          'db',
+          path.resolve(__dirname, './src-electron/db')
+        )
       },
 
       chainWebpackPreload(chain) {

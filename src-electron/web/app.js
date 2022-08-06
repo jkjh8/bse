@@ -1,4 +1,3 @@
-import { process } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import { loggerArr as log } from '../logger'
