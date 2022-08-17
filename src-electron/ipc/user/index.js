@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron'
-import User from '../../db/models/user'
+import User from 'db/models/user'
 
 ipcMain.handle('user:register', async (e, args) => {
   try {

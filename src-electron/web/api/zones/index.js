@@ -1,6 +1,6 @@
-import { loggerArr as log } from '../../../logger'
-import Zones from '../../../db/models/zones'
-import { zoneToStr } from '../functions'
+import { loggerArr as log } from 'logger'
+import Zones from 'db/models/zones'
+import { zoneToStr } from 'api/functions'
 
 export async function getZones(req, res) {
   try {

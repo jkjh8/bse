@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { loggedIn } from '../../api/users/loggedIn'
+import { loggedIn } from 'api/users/loggedIn'
 import {
   getZones,
   addZone,
@@ -8,7 +8,7 @@ import {
   checkIndex,
   checkCore,
   deleteZone
-} from '../../api/zones'
+} from 'api/zones'
 
 const router = express.Router()
 

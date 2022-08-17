@@ -1,6 +1,9 @@
 import passport from 'passport'
-import { loggerArr as logger } from '../../../logger'
-import User from '../../../db/models/user'
+import bcrypt from 'bcrypt'
+import { loggerArr as logger } from 'logger'
+import User from 'db/models/user'
+
+const saltRounds = 10
 
 export async function isAuth(req, res) {
   if (req.isAuthenticated()) {
@@ -22,7 +25,9 @@ export async function checkEmail(req, res) {
 export async function register(req, res) {
   try {
     const { name, email, password } = req.body
-    const user = new User({ name, email, password })
+    const salt = bcrypt.genSaltSync(saltRounds)
+    const hash = bcrypt.hashSync(password, salt)
+    const user = new User({ name, email, password: hash })
     await user.save()
     logger(3, 'Server', `회원가입: ${email}`)
     return res.status(200).send(null)

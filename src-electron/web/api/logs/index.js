@@ -1,5 +1,5 @@
-import { loggerArr as logger } from '../../../logger'
-import Eventlog from '../../../db/models/eventlog'
+import { loggerArr as logger } from 'logger'
+import Eventlog from 'db/models/eventlog'
 import Hangul from 'hangul-js'
 
 export const getEventlog = async (req, res) => {

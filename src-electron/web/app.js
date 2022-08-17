@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import { loggerArr as log } from '../logger'
+import { loggerArr as log } from 'logger'
 
 import express from 'express'
 import cors from 'cors'

@@ -1,12 +1,23 @@
 import Devices from 'db/models/devices'
-import { loggerArr as log } from '../../../logger'
+import { loggerArr as log } from 'logger/index.js'
 import { objTokv } from '../functions'
+
+const status = {}
 
 export async function getDevices(req, res) {
   try {
     return res.status(200).json(await Devices.find({}).sort({ index: 1 }))
   } catch (err) {
     log(5, req.user, `디바이스리스트오류: ${err}`)
+    return res.status(500).json(err)
+  }
+}
+
+export async function getStatus(req, res) {
+  try {
+    return res.status(200).json(status)
+  } catch (err) {
+    log(5, req.user, `디바이스상태오류: ${err}`)
     return res.status(500).json(err)
   }
 }

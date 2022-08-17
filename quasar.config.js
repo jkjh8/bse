@@ -232,6 +232,18 @@ module.exports = configure(function (ctx) {
           'db',
           path.resolve(__dirname, './src-electron/db')
         )
+        chain.resolve.alias.set(
+          'web',
+          path.resolve(__dirname, './src-electron/web')
+        )
+        chain.resolve.alias.set(
+          'logger',
+          path.resolve(__dirname, './src-electron/logger')
+        )
+        chain.resolve.alias.set(
+          'api',
+          path.resolve(__dirname, './src-electron/web/api')
+        )
       },
 
       chainWebpackPreload(chain) {

@@ -1,15 +1,16 @@
 import express from 'express'
 const router = express.Router()
 
-import { loggedIn } from '../../api/users/loggedIn'
+import { loggedIn } from 'api/users/loggedIn'
 import {
   getDevices,
+  getStatus,
   addDevice,
   editDevice,
   deleteDevice,
   checkIndex,
   checkIpaddress
-} from '../../api/devices'
+} from 'api/devices'
 // import {
 //   getDeviceStatus,
 //   getPaStatus,
@@ -20,6 +21,7 @@ import {
 router.get('/', loggedIn, getDevices)
 router.post('/', loggedIn, addDevice)
 router.put('/', loggedIn, editDevice)
+router.get('/status', loggedIn, getStatus)
 router.delete('/:value', loggedIn, deleteDevice)
 
 // check exists functions

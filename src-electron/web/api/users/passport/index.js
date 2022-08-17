@@ -1,6 +1,7 @@
 import passport from 'passport'
+import bcrypt from 'bcrypt'
 import { Strategy as LocalStrategy } from 'passport-local'
-import User from '../../../../db/models/user'
+import User from 'db/models/user'
 
 export default function () {
   passport.serializeUser((user, done) => {
@@ -22,7 +23,7 @@ export default function () {
           const user = await User.findOne({ email: email })
           if (!user)
             return done(null, false, { message: '사용자를 찾을 수 없습니다.' })
-          const isValid = await user.verifyPassword(password)
+          const isValid = bcrypt.compareSync(password, user.password)
           if (!isValid)
             return done(null, false, {
               message: '비밀번호가 일치 하지 않습니다.'

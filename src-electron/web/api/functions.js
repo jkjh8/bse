@@ -1,16 +1,16 @@
-module.exports.objToStr = (obj) => {
+export const objToStr = (obj) => {
   return Object.entries(obj)
     .map(([key, value]) => `${key}=${value ?? 'null'}`)
     .join(', ')
 }
 
-module.exports.objTokv = (obj) => {
+export const objTokv = (obj) => {
   return `이름:${obj.name ?? ' '},${
     obj.ipaddress ? ' 아이피주소:' + obj.ipaddress + ',' : ''
   } Index: ${obj.index}, Type:${obj.deviceType}, Mode:${obj.mode}`
 }
 
-module.exports.zoneToStr = (obj) => {
+export const zoneToStr = (obj) => {
   const children = []
   for (let i = 0; i < obj.children.length; i++) {
     if (obj.children[i]) {

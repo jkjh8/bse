@@ -1,5 +1,5 @@
-import { loggerArr as log } from '../../../logger'
-import User from '../../../db/models/user'
+import { loggerArr as log } from 'logger'
+import User from 'db/models/user'
 
 export async function getUsers(req, res) {
   try {

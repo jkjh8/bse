@@ -16,5 +16,4 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-userSchema.plugin(require('mongoose-bcrypt'), { rounds: 10 })
 export default mongoose.model('User', userSchema)

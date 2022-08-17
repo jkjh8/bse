@@ -1,7 +1,7 @@
 import express from 'express'
-import { isAdmin, loggedIn } from '../../api/users/loggedIn'
-import { isAuth, checkEmail, register, login, logout } from '../../api/users'
-import { getUsers, setAdmin, deleteUser } from '../../api/users/admin'
+import { isAdmin, loggedIn } from 'api/users/loggedIn'
+import { isAuth, checkEmail, register, login, logout } from 'api/users'
+import { getUsers, setAdmin, deleteUser } from 'api/users/admin'
 
 const router = express.Router()
 
