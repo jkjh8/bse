@@ -26,6 +26,17 @@ export const getEventlog = async (req, res) => {
   }
 }
 
+export const downloadLog = async (req, res) => {
+  try {
+    const { start, end } = JSON.parse(req.query.options)
+    const r = await Eventlog.find({ createdAt: { $gte: start, $lte: end } })
+    console.log(r)
+  } catch (err) {
+    logger(5, req.user, `이벤트로그다운로드오류: ${err}`)
+    return res.status(500).json(err)
+  }
+}
+
 export const deleteAllEventlog = async (req, res) => {
   try {
     await Eventlog.deleteMany({})
