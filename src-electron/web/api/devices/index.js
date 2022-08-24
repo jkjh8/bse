@@ -85,3 +85,12 @@ export async function checkIpaddress(req, res) {
     res.status(500).json(err)
   }
 }
+
+export async function deviceRefresh(req, res) {
+  try {
+    const { ipaddress, deviceType, mode } = JSON.parse(req.params.value)
+  } catch (err) {
+    log(5, req.user, `디바이스갱신오류: ${err}`)
+    res.status(500).json(err)
+  }
+}

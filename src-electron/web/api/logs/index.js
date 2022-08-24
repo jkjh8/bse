@@ -1,6 +1,7 @@
 import { loggerArr as logger } from 'logger'
 import Eventlog from 'db/models/eventlog'
 import Hangul from 'hangul-js'
+import { Parser } from 'json2csv'
 
 export const getEventlog = async (req, res) => {
   try {
@@ -30,7 +31,11 @@ export const downloadLog = async (req, res) => {
   try {
     const { start, end } = JSON.parse(req.query.options)
     const r = await Eventlog.find({ createdAt: { $gte: start, $lte: end } })
-    console.log(r)
+    const fields = ['createdAt', 'priority', 'id', 'zones', 'message']
+    const opts = { fields }
+    const parser = new Parser(opts)
+    const csv = parser.parse(r)
+    res.status(200).send(csv)
   } catch (err) {
     logger(5, req.user, `이벤트로그다운로드오류: ${err}`)
     return res.status(500).json(err)

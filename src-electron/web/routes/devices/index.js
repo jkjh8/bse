@@ -8,6 +8,7 @@ import {
   addDevice,
   editDevice,
   deleteDevice,
+  deviceRefresh,
   checkIndex,
   checkIpaddress
 } from 'api/devices'
@@ -22,6 +23,7 @@ router.get('/', loggedIn, getDevices)
 router.post('/', loggedIn, addDevice)
 router.put('/', loggedIn, editDevice)
 router.get('/status', loggedIn, getStatus)
+router.get('refresh/:value', loggedIn, deviceRefresh)
 router.delete('/:value', loggedIn, deleteDevice)
 
 // check exists functions

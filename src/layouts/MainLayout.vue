@@ -34,7 +34,7 @@ const router = useRouter()
 }
 .header-font {
   font-family: 다음체;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 1.5rem;
 }
 .logo {
